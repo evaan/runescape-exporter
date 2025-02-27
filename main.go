@@ -54,6 +54,8 @@ func metrics(w http.ResponseWriter, r *http.Request) {
 
 	output := ""
 
+	output += fmt.Sprintf("runescape_combatlevel{player=\"%s\"} %.0f\n", rsn, data["combatLevel"])
+
 	for _, skill := range data["latestSnapshot"].(map[string]interface{})["data"].(map[string]interface{})["skills"].(map[string]interface{}) {
 		if skillMap, ok := skill.(map[string]interface{}); ok {
 			output += fmt.Sprintf("runescape_%s_level{player=\"%s\"} %.0f\n", skillMap["metric"], rsn, skillMap["level"])
